@@ -4,7 +4,7 @@ header#main-header{
   background: aqua;
   font-size: 50px;
   font-weight: bold;
-  color: darkblue;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
