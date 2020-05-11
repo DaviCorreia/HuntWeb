@@ -1,0 +1,38 @@
+.product-list{
+  max-width: 700px;
+  margin: 20 auto 0;
+  padding: 0 20px;
+}
+.product-list article{
+  background: lavenderblush;
+  border: 5px solid plum;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.product-list article p {
+  font-size: 16px;
+  color: crimson;
+  margin-top: 5px;
+  line-height: 24px;
+}
+.product-list article a {
+  height: 42px;
+  border-radius: 6px;
+  border: 2px solid slateblue;
+  background: none;
+  margin-top: 10px;
+  color: slateblue;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+.product-list article a :hover{
+  background: slateblue;
+  color: snow;
+}
+
