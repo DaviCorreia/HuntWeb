@@ -7,22 +7,45 @@ import './styles.css';
 export default class Main extends Component {
 state = {
   products : [],
+  productInfo : {},
+  page : 1,
 }
   componentDidMount(){
 
     this.loadProducts();
   }
 
-  loadProducts = async () =>{
-    const response = await api.get('/products');
-
-    //console.log(response.data.docs);
-    this.setState({products:response.data.docs});
+  loadProducts = async (page = 1) =>{
+    const response = await api.get(`/products?page=${page}`);
+    //docs contem os produtos e productInfo
+    // contem todo resto retornado da API
+    const {docs, ...productInfo} = response.data;
+    
+    this.setState({products: docs , productInfo, page});
 
   };
+  prevPage = () =>{
+    const {page,productInfo } = this.state;
+    if (page === 1) return;
+    const pageNumber = page -1;
+    this.loadProducts(pageNumber);
+
+  }
+  nextPage =() =>{
+    const {page,productInfo } = this.state;
+
+    //verifica se a pagina atual já é a ultima página
+    if (page === productInfo.pages) return;
+    // se não estiver na ultima página
+    const pageNumber = page +1;
+
+    this.loadProducts(pageNumber);
+
+  }
 
   render(){
-    const {products} = this.state;
+    const {products,page,productInfo} = this.state;
+
   return (
     <div className = "product-list"> 
     {products.map(product =>(
@@ -37,8 +60,12 @@ state = {
 
         </article>
     ))}
+    <div className="actions">
+      <button disabled={page === 1} onClick = {this.prevPage}>Anterior</button>
+      <button disabled={page=== productInfo.pages } onClick = {this.nextPage}>Próximo</button>
+       </div>
     </div>
-  )
-  //<h1>contagem de produtos :{this.state.products.length}</h1>;
+  );
+  
   }
 }
